@@ -1,0 +1,18 @@
+# Some inspiration from
+# https://github.com/anishathalye/dotfiles/blob/master/.install.conf.yaml
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~', '~/.config']
+
+- link:
+    ~/.spacemacs : spacemacs/private/my_spacemacs
+    ~/.emacs.d : doom-emacs
+    ~/.doom.d : doom.d
+
+- shell:
+  - git submodule sync --recursive
+  - git submodule update --init --recursive
+  - (which emacs && ./doom-emacs/bin/doom --yes sync) || echo "No emacs - skipped"
